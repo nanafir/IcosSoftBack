@@ -29,12 +29,36 @@ public class DataUsuarios {
     public DataUsuarios() {
     }
 
+    public DataUsuarios(int id_Usuario) {
+        this.id_Usuario = id_Usuario;
+    }
+
+       public DataUsuarios(int id_Usuario, String usuario, String nombre, String apellido, String contraseña, String correo_electronico, int rol, int tipo_identificacion, int catalogo) {
+        this.id_Usuario = id_Usuario;
+        this.usuario = usuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.contraseña = contraseña;
+        this.correo_electronico = correo_electronico;
+        this.rol = rol;
+        this.tipo_identificacion = tipo_identificacion;
+        this.catalogo = catalogo;
+    }
+
     public int getId_Usuario() {
         return id_Usuario;
     }
 
     public void setId_Usuario(int id_Usuario) {
         this.id_Usuario = id_Usuario;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getNombre() {
@@ -93,17 +117,12 @@ public class DataUsuarios {
         this.catalogo = catalogo;
     }
 
-    public boolean guardarUsuario() {
-        Conexion conexion = new Conexion();
-        String sentencia = "INSERT INTO USUARIOS(id_Usuario, usuario, nombre, apellido, contraseña, correo_electronico, rol, tipo_identificacion, catalogo) VALUES ( ?,?,?,?,?,?,?,?,?)";
-        return false;
-      
-    }
-
     @Override
     public String toString() {
         return "DataUsuarios{" + "id_Usuario=" + id_Usuario + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", contrase\u00f1a=" + contraseña + ", correo_electronico=" + correo_electronico + ", rol=" + rol + ", tipo_identificacion=" + tipo_identificacion + ", catalogo=" + catalogo + '}';
     }
+
+    
 
 
     }

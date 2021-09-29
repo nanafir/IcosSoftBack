@@ -24,7 +24,7 @@ public class Conexion {
       return ds;
     
   }  
-    public static Connection getConection() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         return getDataSource().getConnection();
     
     
@@ -55,7 +55,7 @@ public class Conexion {
     
     public static void main(String[] args) throws SQLException {
         Conexion mysql = new Conexion();
-        mysql.getConection();
+        mysql.getConnection();
         System.out.println("conexion exitosa");
         
         
