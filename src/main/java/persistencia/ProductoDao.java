@@ -1,15 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package persistencia;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import logica.DataUsuarios;
-import persistencia.Conexion;
 
-public class UsuariosDao {
- 
-  
-    
+/**
+ *
+ * @author nanaf
+ */
+public class ProductoDao {
+     
     private static final String SQL_SELECT = "SELECT id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo FROM USUARIOS";
 
     private static final String SQL_INSERT = "INSERT INTO +tabla+ ( id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo ) VALUES (?,?,?,?,?,?,?,?,?) ";
