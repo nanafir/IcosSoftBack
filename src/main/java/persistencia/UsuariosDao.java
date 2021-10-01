@@ -1,8 +1,9 @@
-package logica;
+package persistencia;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import logica.DataUsuarios;
 import persistencia.Conexion;
 
 public class UsuariosDao {
@@ -54,4 +55,89 @@ public class UsuariosDao {
         return usuarios;
     }
 
+    public int insertar(DataUsuarios user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setInt(1, user.getId_Usuario());
+            stmt.setString(2, user.getUsuario());
+            stmt.setString(3, user.getNombre());
+            stmt.setString(4, user.getApellido());
+            stmt.setString(5, user.getContraseña());
+            stmt.setString(6, user.getCorreo_electronico());
+            stmt.setInt(7, user.getRol());
+            stmt.setInt(8, user.getTipo_identificacion());
+            stmt.setInt(9, user.getCatalogo());
+
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+
+            Conexion.close(stmt);
+            Conexion.close(conn);
+
+        }
+        return rows;
+
+    }
+
+    public int Actualizar(DataUsuarios user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, user.getUsuario());
+            stmt.setString(2, user.getNombre());
+            stmt.setString(3, user.getApellido());
+            stmt.setString(4, user.getContraseña());
+            stmt.setString(5, user.getCorreo_electronico());
+            stmt.setInt(6, user.getRol());
+            stmt.setInt(7, user.getTipo_identificacion());
+            stmt.setInt(8, user.getCatalogo());
+            stmt.setInt(9, user.getId_Usuario());
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+
+            Conexion.close(stmt);
+            Conexion.close(conn);
+
+        }
+        return rows;
+
+    }
+
+    public int Eliminar(DataUsuarios user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, user.getId_Usuario());
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+
+            Conexion.close(stmt);
+            Conexion.close(conn);
+
+        }
+        return rows;
+
+    }
 }
