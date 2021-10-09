@@ -1,19 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import persistencia.Conexion;
-
-/**
- *
- * @author nanaf
- */
 public class DataUsuarios {
 
     private int id_Usuario;
@@ -33,7 +19,7 @@ public class DataUsuarios {
         this.id_Usuario = id_Usuario;
     }
 
-       public DataUsuarios(int id_Usuario, String usuario, String nombre, String apellido, String contraseña, String correo_electronico, int rol, int tipo_identificacion, int catalogo) {
+    public DataUsuarios(int id_Usuario, String usuario, String nombre, String apellido, String contraseña, String correo_electronico, int rol, int tipo_identificacion, int catalogo) {
         this.id_Usuario = id_Usuario;
         this.usuario = usuario;
         this.nombre = nombre;
@@ -122,7 +108,4 @@ public class DataUsuarios {
         return "DataUsuarios{" + "id_Usuario=" + id_Usuario + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", contrase\u00f1a=" + contraseña + ", correo_electronico=" + correo_electronico + ", rol=" + rol + ", tipo_identificacion=" + tipo_identificacion + ", catalogo=" + catalogo + '}';
     }
 
-    
-
-
-    }
+}

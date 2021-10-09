@@ -1,4 +1,3 @@
-
 package persistencia;
 
 import java.sql.Connection;
@@ -6,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 import org.apache.commons.dbcp2.BasicDataSource;
-
 
 public class Conexion {
     private static final String JDBC_URL="jdbc:mysql://localhost:3306/icos?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
@@ -57,7 +56,7 @@ public class Conexion {
         Conexion mysql = new Conexion();
         mysql.getConnection();
         System.out.println("conexion exitosa");
-        
+        JOptionPane.showMessageDialog(null, "Conexión exitosa");
         
     }
     

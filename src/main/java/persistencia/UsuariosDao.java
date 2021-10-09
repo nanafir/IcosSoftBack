@@ -4,23 +4,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import logica.DataUsuarios;
-import persistencia.Conexion;
 
 public class UsuariosDao {
- 
-  
-    
+
     private static final String SQL_SELECT = "SELECT id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo FROM USUARIOS";
 
-    private static final String SQL_INSERT = "INSERT INTO +tabla+ ( id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo ) VALUES (?,?,?,?,?,?,?,?,?) ";
+    private static final String SQL_INSERT = "INSERT INTO USUARIOS ( id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo ) VALUES (?,?,?,?,?,?,?,?,?) ";
 
     private static final String SQL_UPDATE = "UPDATE USUARIOS SET usuario=?, nombre=?, apellido=?, contraseña=?, correo_electronico=?,  rol=?, tipo_identificacion=?, catalogo=? WHERE id_Usuario=?";
 
     private static final String SQL_DELETE = "DELETE FROM USUARIOS WHERE id_Usuario=?";
-   
 
-   
-    
     public List<DataUsuarios> listarUsuario() {
         Connection conn = null;
         PreparedStatement stmt = null;

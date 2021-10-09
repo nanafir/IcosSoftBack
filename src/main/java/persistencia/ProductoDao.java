@@ -1,40 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import logica.DataUsuarios;
+import logica.DataProducto;
 
-/**
- *
- * @author nanaf
- */
 public class ProductoDao {
-     
-    private static final String SQL_SELECT = "SELECT id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo FROM USUARIOS";
 
-    private static final String SQL_INSERT = "INSERT INTO +tabla+ ( id_Usuario,  usuario, nombre, apellido, contraseña, correo_electronico,  rol, tipo_identificacion, catalogo ) VALUES (?,?,?,?,?,?,?,?,?) ";
+    private static final String SQL_SELECT = "SELECT id_producto, nombre_producto, valor_venta, stock, fecha_expiracion FROM PRODUCTO";
 
-    private static final String SQL_UPDATE = "UPDATE USUARIOS SET usuario=?, nombre=?, apellido=?, contraseña=?, correo_electronico=?,  rol=?, tipo_identificacion=?, catalogo=? WHERE id_Usuario=?";
+    private static final String SQL_INSERT = "INSERT INTO PRODUCTO ( id_producto, nombre_producto, valor_venta, stock, fecha_expiracion ) VALUES (?,?,?,?,?) ";
 
-    private static final String SQL_DELETE = "DELETE FROM USUARIOS WHERE id_Usuario=?";
-   
+    private static final String SQL_UPDATE = "UPDATE PRODUCTO SET nombre_producto=?, valor_venta=?, stock=?, fecha_expiracion=? WHERE id_producto=?";
 
-   
-    
-    public List<DataUsuarios> listarUsuario() {
+    private static final String SQL_DELETE = "DELETE FROM PRODUCTO WHERE id_producto=?";
+
+    public List<DataProducto> listarProduct() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        DataUsuarios user = null;
-        List<DataUsuarios> usuarios = new ArrayList<>();
+        DataProducto userProducto = null;
+        List<DataProducto> Productos = new ArrayList<>();
 
         try {
             conn = Conexion.getConnection();
@@ -43,18 +30,14 @@ public class ProductoDao {
 
             while (rs.next()) {
 
-                int id_Usuario = rs.getInt("id_Usuario");
-                String usuario = rs.getString("usuario");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String contraseña = rs.getString("contraseña");
-                String correo_electronico = rs.getString("correo_electronico");
-                int rol = rs.getInt("rol");
-                int tipo_identificacion = rs.getInt("tipo_identificacion");
-                int catalogo = rs.getInt("catalogo");
+                int id_producto = rs.getInt("id_producto");
+                String nombre_producto = rs.getString("nombre_producto");
+                String valor_venta = rs.getString("valor_venta");
+                String stock = rs.getString("stock");
+                String fecha_expiracion = rs.getString("fecha_expiracion");
 
-                user = new DataUsuarios(id_Usuario, usuario, nombre, apellido, contraseña, correo_electronico, rol, tipo_identificacion, catalogo);
-                usuarios.add(user);
+                userProducto = new DataProducto(id_producto, nombre_producto, Double.MAX_VALUE, id_producto, Date.valueOf(LocalDate.MAX));
+                Productos.add(userProducto);
 
             }
         } catch (SQLException ex) {
@@ -65,10 +48,10 @@ public class ProductoDao {
             Conexion.close(conn);
 
         }
-        return usuarios;
+        return Productos;
     }
 
-    public int insertar(DataUsuarios user) {
+    public int insertar(DataProducto user) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -76,15 +59,11 @@ public class ProductoDao {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, user.getId_Usuario());
-            stmt.setString(2, user.getUsuario());
-            stmt.setString(3, user.getNombre());
-            stmt.setString(4, user.getApellido());
-            stmt.setString(5, user.getContraseña());
-            stmt.setString(6, user.getCorreo_electronico());
-            stmt.setInt(7, user.getRol());
-            stmt.setInt(8, user.getTipo_identificacion());
-            stmt.setInt(9, user.getCatalogo());
+            stmt.setInt(1, user.getId_producto());
+            stmt.setString(2, user.getNombre_producto());
+            stmt.setDouble(3, user.getValor_venta());
+            stmt.setInt(4, user.getStock());
+            stmt.setDate(5, (Date) user.getFecha_expiracion());
 
             rows = stmt.executeUpdate();
 
@@ -100,7 +79,7 @@ public class ProductoDao {
 
     }
 
-    public int Actualizar(DataUsuarios user) {
+    public int Actualizar(DataProducto user) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -108,15 +87,12 @@ public class ProductoDao {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, user.getUsuario());
-            stmt.setString(2, user.getNombre());
-            stmt.setString(3, user.getApellido());
-            stmt.setString(4, user.getContraseña());
-            stmt.setString(5, user.getCorreo_electronico());
-            stmt.setInt(6, user.getRol());
-            stmt.setInt(7, user.getTipo_identificacion());
-            stmt.setInt(8, user.getCatalogo());
-            stmt.setInt(9, user.getId_Usuario());
+            stmt.setString(1, user.getNombre_producto());
+            stmt.setDouble(2, user.getValor_venta());
+            stmt.setInt(3, user.getStock());
+            stmt.setDate(4, (Date) user.getFecha_expiracion());
+            stmt.setInt(5, user.getId_producto());
+
             rows = stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -131,7 +107,7 @@ public class ProductoDao {
 
     }
 
-    public int Eliminar(DataUsuarios user) {
+    public int Eliminar(DataProducto user) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -139,7 +115,7 @@ public class ProductoDao {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, user.getId_Usuario());
+            stmt.setInt(1, user.getId_producto());
             rows = stmt.executeUpdate();
 
         } catch (SQLException ex) {

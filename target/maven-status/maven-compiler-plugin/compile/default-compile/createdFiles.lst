@@ -1,2 +1,9 @@
-logica\DataUsuarios.class
+persistencia\UsuariosDao.class
+persistencia\ProductoDao.class
 persistencia\Conexion.class
+logica\DataRoles.class
+logica\DataProducto.class
+logica\DataUsuarios.class
+logica\DataCatalogo.class
+persistencia\RolesDao.class
+persistencia\CatalogoDao.class
